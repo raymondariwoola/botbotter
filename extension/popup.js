@@ -7,6 +7,7 @@ chrome.storage.sync.get("color", ({
   changeColor.style.backgroundColor = color;
 });
 
+
 // When the button is clicked, inject setPageBackgroundColor into current page
 changeColor.addEventListener("click", async () => {
   let [tab] = await chrome.tabs.query({
@@ -18,24 +19,26 @@ changeColor.addEventListener("click", async () => {
     target: {
       tabId: tab.id
     },
-    function () {
-      console.log("What???")
-
-      alert("Loaded")
-      console.log("changeColor ssssss");
-      // document.getElementById("box").innerHTML = "Changed";
-      // // $("#box").html("changed");
-
-      // The body of this function will be execuetd as a content script inside the
-      // current page
-      chrome.storage.sync.get("color", ({
-        color
-      }) => {
-        document.body.style.backgroundColor = color;
-      });
-
-    }
+    function: setPageBackgroundColor,
   });
-
-
 });
+
+// The body of this function will be executed as a content script inside the
+// current page
+function setPageBackgroundColor() {
+  chrome.storage.sync.get("color", ({
+    color
+  }) => {
+    document.body.style.backgroundColor = color;
+    // document.querySelector('body>app-root>app-chatbot-icon>div.chatbot-toggle-icon>div.animate>img.ng-star-inserted').click();
+  });
+  
+}
+
+function editPageContent() {
+    console.log("What???");
+    alert("Loaded");
+    console.log("changeColor ssssss");
+    document.body.innerHTML = "Changed";
+}
+
