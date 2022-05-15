@@ -43,5 +43,22 @@ function constructOptions(buttonColors) {
   });
 }
 
+
 // Initialize the page by constructing the color options
 constructOptions(presetButtonColors);
+
+
+function makeid() {
+  let length = 9;
+  var result = '';
+  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() *
+      charactersLength));
+  }
+  chrome.storage.sync.set({result});
+}
+
+makeid();
+
